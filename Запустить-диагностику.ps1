@@ -24,6 +24,7 @@ if (-not $isAdmin) {
         Start-Process powershell -Verb RunAs -ArgumentList @(
             '-ExecutionPolicy', 'Bypass',
             '-NoProfile',
+            '-NoExit',
             '-File', ('"{0}"' -f $script)
         )
         exit 0

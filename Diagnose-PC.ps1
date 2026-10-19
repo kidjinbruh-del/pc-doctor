@@ -817,6 +817,12 @@ if (-not $NoHtml) {
     $hb = New-Object System.Text.StringBuilder
     function Add-Html { param([string]$s) [void]$hb.AppendLine($s) }
 
+    # Короткий H вызывается ниже (876, 881, 882, 903), но нигде не был
+    # определён: из-за $ErrorActionPreference = 'SilentlyContinue' вызовы
+    # падали молча, и в HTML-отчёт не попадали «Замечаний нет»,
+    # «Почему важно», «Что делать» и таблица температур.
+    function H { param([string]$s) Add-Html $s }
+
     Add-Html '<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8">'
     Add-Html '<meta name="viewport" content="width=device-width, initial-scale=1">'
     Add-Html '<title>Диагностика ПК — ' + ($env:COMPUTERNAME) + '</title>'
